@@ -2,10 +2,10 @@
 require('database.php');
 
 
-$query = 'SELECT customers.customerID,customers.emailAddress,customers.firstName,customers.lastName,
-addresses.line1,addresses.city,addresses.state,addresses.zipCode,customers.phone
-FROM customers JOIN addresses ON customers.customerID = addresses.customerID';// PUT YOUR SQL QUERY HERE
-// Example: $query = 'SELECT * FROM customers';
+$query = 'SELECT C.customerID, C.emailAddress, C.firstName, C.lastName, A.line1, A.city, A.state, A.zipCode, C.phone
+FROM customers as C JOIN addresses as A 
+ON C.customerID = A.customerID
+GROUP BY C.customerID, C.emailAddress, C.firstName, C.lastName, A.line1, A.city, A.state, A.zipCode, C.phone';
 
 $statement = $db->prepare($query);
 $statement->execute();
